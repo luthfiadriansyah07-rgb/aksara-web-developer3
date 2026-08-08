@@ -441,15 +441,15 @@
     <div class="testi-grid reveal">
       <div class="testi-card">
         <p class="quote">"Website jadi tepat waktu dan kami bisa update menu sendiri tanpa bantuan siapa pun."</p>
-        <div class="who"><b>ina Ismawati.</b> — Pemilik Usaha Kuliner</div>
+        <div class="who"><b>Rina W.</b> — Pemilik Usaha Kuliner</div>
       </div>
       <div class="testi-card">
         <p class="quote">"Proses desainnya jelas dari awal, tidak ada revisi yang bikin bingung."</p>
-        <div class="who"><b>saskia istikomah.</b> — Pemilik Rumah Makan</div>
+        <div class="who"><b>Bagus P.</b> — Pemilik Rumah Makan</div>
       </div>
       <div class="testi-card">
         <p class="quote">"Website terasa mewakili karakter usaha kami, bukan template yang dipakai semua orang."</p>
-        <div class="who"><b>sahrul elzirazi.</b> — Manajer Operasional</div>
+        <div class="who"><b>Sari M.</b> — Manajer Operasional</div>
       </div>
     </div>
   </div>
@@ -495,20 +495,20 @@
         </div>
       </div>
     </div>
-    <form onsubmit="event.preventDefault(); alert('Terima kasih! Ini contoh tampilan — hubungkan form ini ke email atau layanan pengiriman pesan pilihan Anda.');">
+    <form id="contactForm">
       <div>
         <label for="nama">Nama</label>
-        <input id="nama" type="text" placeholder="Nama lengkap" required>
+        <input id="nama" name="nama" type="text" placeholder="Nama lengkap" required>
       </div>
       <div>
         <label for="email">Email</label>
-        <input id="email" type="email" placeholder="nama@bisnis.com" required>
+        <input id="email" name="email" type="email" placeholder="nama@bisnis.com" required>
       </div>
       <div>
         <label for="pesan">Ceritakan kebutuhan Anda</label>
-        <textarea id="pesan" placeholder="Jenis website, target waktu, dan hal lain yang perlu kami tahu"></textarea>
+        <textarea id="pesan" name="pesan" placeholder="Jenis website, target waktu, dan hal lain yang perlu kami tahu" required></textarea>
       </div>
-      <button type="submit">Kirim Pesan</button>
+      <button type="submit">Kirim Pesan via WhatsApp</button>
     </form>
   </div>
 </section>
@@ -551,6 +551,35 @@
     setTimeout(typeNext, 500);
   }
   typeNext();
+
+  // Form kontak -> WhatsApp
+  const contactForm = document.getElementById('contactForm');
+
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const nama = document.getElementById('nama').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const pesan = document.getElementById('pesan').value.trim();
+
+    // GANTI NOMOR INI dengan nomor WhatsApp kamu.
+    // Gunakan kode negara tanpa tanda + atau spasi.
+    const nomorWhatsApp = '+62 851-3597-4307';
+
+    const teks = `Halo Aksara, saya ingin konsultasi website.
+
+Nama: ${nama}
+Email: ${email}
+
+Kebutuhan:
+${pesan}`;
+
+    const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(teks)}`;
+
+    window.open(url, '_blank');
+
+    contactForm.reset();
+  });
 
   // Scroll reveal
   const obs = new IntersectionObserver((entries)=>{
